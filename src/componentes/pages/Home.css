@@ -1,0 +1,88 @@
+#contenedor-login {
+    background-image: url('../../imagenes/fondoLogin.png');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100vh;
+}
+
+.flex-login {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: black;
+    background-color:#FDD6A8;
+    border-radius: 15px;
+    box-shadow: 0px 0px 50px 3px rgb(0, 0, 0,1);
+    padding: 70px 100px;
+}
+
+.contenedor-img-login {
+    width: 300px;
+    height: 300px;
+    border: 3px solid #D67505;
+    border-radius: 30px;
+}
+
+.titulo-login {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 45px;
+}
+
+.formulario-user{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    row-gap: 20px;
+}
+
+.formulario-user > * {
+    width: 400px;
+    height: 60px;
+    border-radius: 30px;
+    padding: 10px;
+    font-size: 20px;
+}
+
+.btn-iniciar-sesion:hover {
+    background-color: #D67505;
+    color: white;
+    border: 3px solid white;
+}
+
+.contenedor-logo {
+    width: 200px;
+    height: 100px;
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+}
+
+#img-negocio {
+    background-image: url('../../imagenes/imgLogin.png');
+    background-size: cover;
+    background-position: center;
+}
+
+.recuperar-password-user, .registro-user {
+    color: gray;
+    margin: 0;
+}
+
+.registro-user {
+    margin: 5px 0;
+}
+
+.recuperar-password-user {
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+.recuperar-password-user:hover,.registro-user:hover {
+    color: #D67505;
+    cursor: pointer;
+}

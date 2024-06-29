@@ -1,0 +1,17 @@
+.contenedor-btnFlotanteWsp {
+    width: 100px;
+    height: 100px;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.contenedorRegistro {
+    margin: 0;
+    padding: 0;
+}
+
