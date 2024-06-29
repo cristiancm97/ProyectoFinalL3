@@ -8,12 +8,12 @@ import NavBar from '../NavBar/NavBar'
 function Registro() {
   return (
     <div className='contenedorRegistro'>
-        <NavBar/>
-        <FormRegistro/>
-        <div className="contenedor-btnFlotanteWsp">
-            <BtnFlotanteWp
-          NroCelular={'3814653130'}
-        />
+      <NavBar/>
+      <FormRegistro/>
+      <div className="contenedor-btnFlotanteWsp">
+          <BtnFlotanteWp
+        NroCelular={'3814653130'}
+      />
       </div>
       <Footer/>
     </div>

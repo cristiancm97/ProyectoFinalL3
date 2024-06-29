@@ -15,9 +15,12 @@ function NavBarUsuario() {
               <LogoUsuario/>
             </div>
         </div>
-        <div className="grid-item2-nbu"></div>
-        <div className="grid-item3-nbu"></div>
-        <div className="grid-item4-nbu">
+        <div className="grid-item2-nbu">
+          <div className="opc1-nbu"></div>
+          <div className="opc2-nbu"></div>
+          <div className="opc3-nbu"></div>
+        </div>
+        <div className="grid-item3-nbu">
           <button className='btn-logout' id='btn-navbar' onClick={() => navigate("/")}>Logout</button>
         </div>
       </div>
