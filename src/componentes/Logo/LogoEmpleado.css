@@ -1,0 +1,13 @@
+.contenedor-img-logo-le {
+    background-image: url('../../imagenes/logoMarron.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 200px;
+    height: 100px;
+    border: 2px solid white;
+    border-radius: 15px;
+}
+
+.contenedor-img-logo-le:hover {
+    cursor: pointer;
+}

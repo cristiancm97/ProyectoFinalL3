@@ -5,6 +5,7 @@ import Login from './componentes/pages/Home';
 import HomeUsuario from './componentes/pages/HomeUsuario';
 import HomeEmpleado from './componentes/pages/HomeEmpleado';
 import RecuperarPassword from './componentes/pages/RecuperarPassword';
+import HomeAdmin from './componentes/pages/HomeAdmin';
 function App() {
   return (
     <div className="App">
@@ -13,8 +14,10 @@ function App() {
           <Route path="/" element={<Login/>}/>
           <Route path="/registro" element={<Registro/>}/>
           <Route path="/user" element={<HomeUsuario/>}/>
-          <Route path="/admin" element={<HomeEmpleado/>}/>
+          <Route path="/admin" element={<HomeAdmin/>}/>
           <Route path="/recuperar-password" element={<RecuperarPassword/>}/>
+          <Route path='/empleados/:id' element={<HomeEmpleado/>}/>
+          <Route path='/users/:id' element={<HomeUsuario/>}/>
         </Routes>
       </BrowserRouter>     
     </div>

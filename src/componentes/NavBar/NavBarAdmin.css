@@ -1,0 +1,46 @@
+.contenedor-nba {
+    display: flex;
+    width: 100%;
+    height: 150px;
+    background-color: #D67505;
+}
+
+.contenedor-grid-nba {
+    display: grid;
+    width: 100%;
+    height: 100%;
+    grid-template-columns: 250px repeat(2, 1fr) 200px;
+    
+}
+
+.contenedor-grid-nba > *{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /*border: 2px solid white;*/
+}
+
+.contenedor-img-nav-nba {
+    width: 200px;
+    height: 100px;
+}
+
+.btn-logout {
+    background-color: #D67505;
+    width: 150px;
+    height: 50px;
+    border: 2px solid white;
+    border-radius: 25px;
+    font-size: 18px;
+    color: white;
+}
+
+#btn-navbar:hover{
+    cursor: pointer;
+    background-color: white;
+    color: #D67505;
+    scale: 1.1;
+    border: 2px solid white;
+    box-shadow: 1px 1px 5px 5px rgb(0, 0, 0,0.5);
+    transition: all 300ms ease;
+}

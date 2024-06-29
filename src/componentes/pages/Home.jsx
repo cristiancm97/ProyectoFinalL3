@@ -17,9 +17,15 @@ function Login() {
         const password = document.getElementById('password').value;
 
         // Verificar usuario y contraseña
-        if (usuario === 'admin' && password === '1234') {
+        if (usuario === 'admin' && password === '123') {
             // Redireccionar al link deseado
             window.location.href = '/admin'; // Reemplaza con la URL a donde quieras redireccionar
+        } else if (usuario === 'user' && password === '123') {
+          // Redireccionar al link deseado
+          window.location.href = '/users/:id'; // Reemplaza con la URL a donde quieras redireccionar
+        } else if (usuario === 'empleado' && password === '123') {
+          // Redireccionar al link deseado
+          window.location.href = '/empleados/:id'; // Reemplaza con la URL a donde quieras redireccionar
         } else {
             alert("Usuario o contraseña incorrectos");
         }

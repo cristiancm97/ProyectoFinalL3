@@ -1,12 +1,18 @@
 import React from 'react'
 import Footer from '../Footer/Footer'
-import NavBar from '../NavBar/NavBar'
+import NavBarUsuario from '../NavBar/NavBarUsuario'
+import BtnFlotanteWp from '../BtnFlotanteWsp/BtnFlotanteWsp'
 
 function HomeUsuario() {
   return (
     <div>
-      <NavBar/>
+      <NavBarUsuario/>
       <Footer/>
+      <div className="contenedor-btnFlotanteWsp">
+            <BtnFlotanteWp
+          NroCelular={'3814653130'}
+        />
+      </div>
     </div>
   )
 }

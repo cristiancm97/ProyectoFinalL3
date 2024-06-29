@@ -44,8 +44,8 @@ function Footer() {
             </div>
         </div>
         <div className="grid-item-footer" id='item3-footer'>
-            <p>Politicas de privacidad | Informacion Legal</p>
-            <p>Copyright 2024 BibliotecaSabiduria.Inc</p>
+            <p><strong>Politicas de privacidad | Informacion Legal</strong></p>
+            <p><strong>Copyright 2024 BibliotecaSabiduria.Inc</strong></p>
         </div>
       </div>
     </div>

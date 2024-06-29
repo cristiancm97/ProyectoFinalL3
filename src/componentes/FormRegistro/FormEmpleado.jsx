@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import './FormRegistro.css';
+import './FormEmpleado.css';
 import Modal from '../Modal/Modal';
 
-function FormRegistro() {
+function FormEmpleado() {
   const [nombre, setNombre] = useState('');
   const [apellido, setApellido] = useState('');
   const [celular, setCelular] = useState('');
   const [dni, setDni] = useState('');
   const [domicilio, setDomicilio] = useState('');
-  const [localidad, setLocalidad] = useState('San  de Tucumán');
+  const [posicion, setPosicion] = useState('Secretario/a');
+  const [fechaActual, setFechaActual] = useState('');
   const [correo, setCorreo] = useState('');
   const [usuario, setUsuario] = useState('');
   const [password, setPassword] = useState('');
@@ -19,26 +20,27 @@ function FormRegistro() {
   useEffect(() => {
     // Habilitar el botón de envío solo si todos los campos están completos
     const isFormValid =
-      nombre && apellido && celular && dni && domicilio && localidad && correo && usuario && password;
+      nombre && apellido && celular && dni && domicilio && posicion && fechaActual && correo && usuario && password;
     setIsSubmitDisabled(!isFormValid);
-  }, [nombre, apellido, celular, dni, domicilio, localidad, correo,  usuario, password]);
+  }, [nombre, apellido, celular, dni, domicilio, posicion, fechaActual, correo,  usuario, password]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const usuario = {
+    const user = {
         nombre,
         apellido,
         celular,
         dni,
         domicilio,
-        localidad,
+        posicion,
+        fechaActual,
         correo,
         usuario,
         password,
       };
     
-    console.log(usuario)
+    console.log(user)
 
     // Limpia los campos del formulario después de enviarlo
     setNombre('');
@@ -46,7 +48,8 @@ function FormRegistro() {
     setCelular('');
     setDni('');
     setDomicilio('');
-    setLocalidad('San Miguel de Tucumán');
+    setPosicion('Secretario/a');
+    setFechaActual('');
     setCorreo('');
     setUsuario('');
     setPassword('');
@@ -65,7 +68,7 @@ function FormRegistro() {
 
   return (
     <div className="form-container">
-      <h1>Formulario de registro</h1>
+      <h1>Formulario alta de empleado</h1>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label>Nombre/s:</label>
@@ -88,14 +91,16 @@ function FormRegistro() {
           <input type="text" value={domicilio} onChange={(e) => setDomicilio(e.target.value)} required />
         </div>
         <div className="form-group">
-          <label>Localidad:</label>
-          <select id="select" value={localidad} onChange={(e) => setLocalidad(e.target.value)} required>
-            <option value="San Miguel de Tucumán">San Miguel de Tucumán</option>
-            <option value="Yerba Buena">Yerba Buena</option>
-            <option value="Tafí Viejo">Tafí Viejo</option>
-            <option value="Banda del rio sali">Banda del rio sali</option>
-            <option value="Alderetes">Alderetes</option>
+          <label>Puesto de trabajo:</label>
+          <select id="select" value={posicion} onChange={(e) => setPosicion(e.target.value)} required>
+            <option value="San Miguel de Tucumán">Secretario/a</option>
+            <option value="Yerba Buena">Personal de salon</option>
+            <option value="Tafí Viejo">Encargado/a</option>
           </select>
+        </div>
+        <div className="form-group">
+            <label>Fecha de contratacion:</label>
+            <input type="date" value={fechaActual} onChange={(e) => setFechaActual(e.target.value)} required />
         </div>
         <div className="form-group">
           <label>Correo Electrónico:</label>
@@ -118,12 +123,12 @@ function FormRegistro() {
       {/* Renderiza el modal si modalVisible es true */}
       {modalVisible && (
         <Modal
-        tituloMsj="Formulario enviado"
-        cuerpoMsj={`${nombre}, revisa tu correo para activar tu cuenta`}
+        tituloMsj="Perfil creado"
+        cuerpoMsj={"Bienvenido al equipo"}
       />
       )}
     </div>
   );
 }
 
-export default FormRegistro;
+export default FormEmpleado;

@@ -1,11 +1,11 @@
 import React from 'react'
 import Footer from '../Footer/Footer'
-import NavBar from '../NavBar/NavBar'
+import NavBarEmpleado from '../NavBar/NavBarEmpleado'
 
 function HomeEmpleado() {
   return (
     <div>
-      <NavBar/>
+      <NavBarEmpleado/>
       <Footer/>
     </div>
   )
