@@ -1,14 +1,13 @@
 import React from 'react'
-import FormEmpleado from '../FormRegistro/FormEmpleado'
 import NavBarAdmin from '../NavBar/NavBarAdmin'
-import Footer from '../Footer/Footer'
+import Recepcion from '../Recepcion/Recepcion'
 
 function HomeAdmin() {
   return (
     <div>
+      <Recepcion
+      nombre={"Cristian Alejandro"}/>
       <NavBarAdmin/>
-      <FormEmpleado/>
-      <Footer/>
     </div>
   )
 }

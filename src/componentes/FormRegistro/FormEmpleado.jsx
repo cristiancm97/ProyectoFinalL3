@@ -8,8 +8,8 @@ function FormEmpleado() {
   const [celular, setCelular] = useState('');
   const [dni, setDni] = useState('');
   const [domicilio, setDomicilio] = useState('');
+  const [localidad, setLocalidad] = useState('San Miguel de Tucumán');
   const [posicion, setPosicion] = useState('Secretario/a');
-  const [fechaActual, setFechaActual] = useState('');
   const [correo, setCorreo] = useState('');
   const [usuario, setUsuario] = useState('');
   const [password, setPassword] = useState('');
@@ -20,9 +20,9 @@ function FormEmpleado() {
   useEffect(() => {
     // Habilitar el botón de envío solo si todos los campos están completos
     const isFormValid =
-      nombre && apellido && celular && dni && domicilio && posicion && fechaActual && correo && usuario && password;
+      nombre && apellido && celular && dni && domicilio && posicion && correo && usuario && password;
     setIsSubmitDisabled(!isFormValid);
-  }, [nombre, apellido, celular, dni, domicilio, posicion, fechaActual, correo,  usuario, password]);
+  }, [nombre, apellido, celular, dni, domicilio, posicion, correo,  usuario, password]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -33,11 +33,12 @@ function FormEmpleado() {
         celular,
         dni,
         domicilio,
+        localidad,
         posicion,
-        fechaActual,
         correo,
         usuario,
         password,
+        role:"empleado",
       };
     
     console.log(user)
@@ -48,8 +49,7 @@ function FormEmpleado() {
     setCelular('');
     setDni('');
     setDomicilio('');
-    setPosicion('Secretario/a');
-    setFechaActual('');
+    setPosicion('Secretario/a');;
     setCorreo('');
     setUsuario('');
     setPassword('');
@@ -91,16 +91,22 @@ function FormEmpleado() {
           <input type="text" value={domicilio} onChange={(e) => setDomicilio(e.target.value)} required />
         </div>
         <div className="form-group">
-          <label>Puesto de trabajo:</label>
-          <select id="select" value={posicion} onChange={(e) => setPosicion(e.target.value)} required>
-            <option value="San Miguel de Tucumán">Secretario/a</option>
-            <option value="Yerba Buena">Personal de salon</option>
-            <option value="Tafí Viejo">Encargado/a</option>
+          <label>Localidad:</label>
+          <select id="select" value={localidad} onChange={(e) => setLocalidad(e.target.value)} required>
+            <option value="San Miguel de Tucumán">San Miguel de Tucumán</option>
+            <option value="Yerba Buena">Yerba Buena</option>
+            <option value="Tafí Viejo">Tafí Viejo</option>
+            <option value="Banda del rio sali">Banda del rio sali</option>
+            <option value="Alderetes">Alderetes</option>
           </select>
         </div>
         <div className="form-group">
-            <label>Fecha de contratacion:</label>
-            <input type="date" value={fechaActual} onChange={(e) => setFechaActual(e.target.value)} required />
+          <label>Puesto de trabajo:</label>
+          <select id="select" value={posicion} onChange={(e) => setPosicion(e.target.value)} required>
+            <option value="Secretario/a">Secretario/a</option>
+            <option value="Personal de salon">Personal de salon</option>
+            <option value="Encargado/a">Encargado/a</option>
+          </select>
         </div>
         <div className="form-group">
           <label>Correo Electrónico:</label>

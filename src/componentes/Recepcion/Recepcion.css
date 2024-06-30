@@ -1,0 +1,25 @@
+.contenedor-recepcion {
+    background-image: url('../../imagenes/fondoLogin.png');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
+    height: calc(100vh - 150px);
+}
+
+.titulo-recepcion {
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 60px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Ajusta los valores según tu preferencia */
+}
+
+.subtitulo-recepcion {
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 50px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8); /* Ajusta los valores según tu preferencia */
+}

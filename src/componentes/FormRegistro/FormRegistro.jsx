@@ -26,19 +26,21 @@ function FormRegistro() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const usuario = {
+    const user = {
         nombre,
         apellido,
         celular,
         dni,
         domicilio,
         localidad,
+        posicion:"Lector",
         correo,
         usuario,
         password,
+        role:"user",
       };
     
-    console.log(usuario)
+    console.log(user)
 
     // Limpia los campos del formulario después de enviarlo
     setNombre('');

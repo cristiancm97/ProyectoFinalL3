@@ -4,11 +4,11 @@ import '../Logo/LogoEmpleado.css'
 
 function LogoEmpleado({id}) {
 
-    const navigate = useNavigate();
+    const navigate1 = useNavigate();
 
   return (
     <div>
-      <div className="contenedor-img-logo-le" onClick={() => navigate(`/empleados/${id}`)}></div>
+      <div className="contenedor-img-logo-le" onClick={() => navigate1(`/empleados/${id}`)}></div>
     </div>
   )
 }
