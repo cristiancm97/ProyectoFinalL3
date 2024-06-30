@@ -1,0 +1,22 @@
+.acciones-admine{
+    display: flex;
+    flex-direction: row;
+    margin: 20px 50px;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+}
+
+.titulo-admine{
+    text-align: left;
+    margin-left: 50px;
+    font-size: 35px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.acciones-titulo-admine{
+    width: 50%;
+    height: 40px;
+    font-size: 20px;
+    border-radius: 15px;
+}

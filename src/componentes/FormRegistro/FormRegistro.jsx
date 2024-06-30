@@ -8,7 +8,7 @@ function FormRegistro() {
   const [celular, setCelular] = useState('');
   const [dni, setDni] = useState('');
   const [domicilio, setDomicilio] = useState('');
-  const [localidad, setLocalidad] = useState('San  de Tucumán');
+  const [localidad, setLocalidad] = useState('San  Miguel de Tucumán');
   const [correo, setCorreo] = useState('');
   const [usuario, setUsuario] = useState('');
   const [password, setPassword] = useState('');
