@@ -1,6 +1,5 @@
 import React,{useState} from 'react'
 import NavBarAdmin from '../../NavBar/NavBarAdmin'
-import Footer from '../../Footer/Footer'
 import './Socios.css'
 import FormRegistro from '../../FormRegistro/FormRegistro'
 import ListaUsuarios from '../../Listas/ListaSocios/ListaUsuario'
@@ -35,7 +34,6 @@ function Socios() {
       <div>
       {renderComponent()}
       </div>
-      <Footer/>
     </div>
   )
 }

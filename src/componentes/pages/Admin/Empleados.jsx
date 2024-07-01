@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import NavBarAdmin from '../../NavBar/NavBarAdmin'
 import "./Empleados.css"
 import FormEmpleado from '../../FormRegistro/FormEmpleado'
+import ListaEmpleado from '../../Listas/ListaEmpleado/ListaEmpleado'
 
 function Empleados() {
 
@@ -12,7 +13,7 @@ function Empleados() {
         case "Dar de alta un empleado":
             return <FormEmpleado/>
         case "Ver lista de empleados":
-            return <NavBarAdmin/>
+            return <ListaEmpleado/>
         default:
             return null; // Renderiza null si no se ha seleccionado ninguna opción válida
     }
