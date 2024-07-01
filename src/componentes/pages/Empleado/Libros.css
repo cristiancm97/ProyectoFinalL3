@@ -1,0 +1,28 @@
+.contenedor-btnAgregarSocio{
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    margin-top: 50px;
+    
+
+}
+
+.agregarSocio{
+    width: 200px;
+    height: 50px;
+    margin-right: 200px;
+    background-color: white;
+    border-radius: 30px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
+    border: 3px solid #D67505;
+    color: #D67505;
+}
+
+.agregarSocio:hover{
+    background-color: #D67505;
+    color: white;
+    box-shadow: 1px 1px 3px 3px rgb(0, 0, 0,0.5);
+    transition: all 300ms ease;
+}

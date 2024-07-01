@@ -15,7 +15,7 @@ const empleados = [
 function ListaEmpleado() {
   return (
       <div className='cnt-listaempleado' >
-        <h2 className="titulo-listaEmpleados">Lista de Socios</h2>
+        <h2 className="titulo-listaEmpleados">Lista de Empleados</h2>
         {empleados.map((empleado, index) => (
           <Empleado key={index} {...empleado} />
         ))}
