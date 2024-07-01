@@ -1,10 +1,32 @@
 import React, { useState, useEffect } from 'react';
-import './FormGenero.css';
+import './FormLibro.css';
 import Modal from '../Modal/Modal';
 
-function FormGenero() {
-  const [nombre, setNombre] = useState('');
-  const [descripcion, setDescripcion] = useState('');
+function FormLibro() {
+
+    const autores = [
+        {"nombre": "Gabriel García Márquez", "bibliografia": "Cien años de soledad, El amor en los tiempos del cólera", "fechaNac": "1927/03/06"},
+        {"nombre": "William Shakespeare", "bibliografia": "Hamlet, Romeo y Julieta, Macbeth", "fechaNac": "1564/04/23"},
+        {"nombre": "J.R.R. Tolkien", "bibliografia": "El señor de los anillos, El hobbit", "fechaNac": "1892/01/03"},
+        {"nombre": "Jane Austen", "bibliografia": "Orgullo y prejuicio, Sentido y sensibilidad", "fechaNac": "1775/12/16"},
+        {"nombre": "George Orwell", "bibliografia": "1984, Rebelión en la granja", "fechaNac": "1903/06/25"},
+        {"nombre": "Leo Tolstoy", "bibliografia": "Guerra y paz, Anna Karénina", "fechaNac": "1828/09/09"},
+        {"nombre": "Homer", "bibliografia": "La Ilíada, La Odisea", "fechaNac": "-800/01/01"}
+    ];
+
+    const generos = [
+        {"nombre": "Novela", "descripcion": "Narrativa extensa que desarrolla personajes, tramas y conflictos en profundidad, explorando la condición humana y la sociedad."},
+        {"nombre": "Poesía", "descripcion": "Expresión artística mediante el uso estilizado del lenguaje, a menudo con métrica y ritmo, para transmitir emociones, ideas y sensaciones."},
+        {"nombre": "Drama", "descripcion": "Representación literaria que presenta conflictos y emociones intensas, usualmente enfocada en momentos cruciales y decisiones impactantes."},
+        {"nombre": "Ciencia ficción", "descripcion": "Exploración especulativa de futuros posibles, tecnología avanzada y sus impactos en la humanidad, a menudo mezclando ciencia y imaginación."},
+        {"nombre": "Fantasía", "descripcion": "Exploración de mundos imaginarios, magia y seres sobrenaturales, desafiando las leyes naturales y explorando lo extraordinario."}
+    ];
+
+  const [titulo, setTitulo] = useState('');
+  const [autorLibro, setAutorLibro] = useState('');
+  const [anioPub, setAnioPub] = useState('');
+  const [copias, setCopias] = useState('');
+  const [generoLibro, setGeneroLibro] = useState('');
   const [isSubmitDisabled, setIsSubmitDisabled] = useState(true);
   const [modalVisible, setModalVisible] = useState(false);
   const [mensaje, setMensaje] = useState('');
@@ -12,23 +34,29 @@ function FormGenero() {
   useEffect(() => {
     // Habilitar el botón de envío solo si todos los campos están completos
     const isFormValid =
-      nombre && descripcion;
+      titulo && autorLibro && anioPub && copias && generoLibro;
     setIsSubmitDisabled(!isFormValid);
-  }, [nombre, descripcion]);
+  }, [titulo, autorLibro, anioPub, copias, generoLibro]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     const genero = {
-        nombre,
-        descripcion,
+        titulo,
+        autorLibro,
+        anioPub,
+        copias,
+        generoLibro,
       };
     
     console.log(genero)
 
     // Limpia los campos del formulario después de enviarlo
-    setNombre('');
-    setDescripcion('');
+    setTitulo('');
+    setAutorLibro('Seleccione un autor');
+    setAnioPub('');
+    setCopias('');
+    setGeneroLibro('Seleccione un genero');
     
   
     // Mostrar el modal
@@ -44,15 +72,40 @@ function FormGenero() {
 
   return (
     <div className="form-container">
-      <h1>Formulario alta de categoria de genero literario</h1>
+      <h1>Formulario alta de categoria de libro</h1>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
-          <label>Nombre:</label>
-          <input type="text" value={nombre} onChange={(e) => setNombre(e.target.value)} required />
+          <label>Titulo:</label>
+          <input type="text" value={titulo} onChange={(e) => setTitulo(e.target.value)} required />
+        </div>
+
+        <div className="form-group">
+            <label>Autor:</label>
+            <select value={autorLibro} onChange={(e) => setAutorLibro(e.target.value)} id='type-select' required>
+                <option value="Seleccione un autor">Seleccione un autor</option>
+                    {autores.map((autor, index) => (
+                <option key={index} value={autor.nombre}>{autor.nombre}</option>
+                ))}
+            </select>
+        </div>
+
+        <div className="form-group">
+            <label>Genero:</label>
+            <select value={generoLibro} onChange={(e) => setGeneroLibro(e.target.value)} id='type-select' required>
+                <option value="Seleccione un genero">Seleccione un genero</option>
+                    {generos.map((genero, index) => (
+                <option key={index} value={genero.nombre}>{genero.nombre}</option>
+                ))}
+            </select>
+        </div>
+
+        <div className="form-group">
+          <label>Año de publicacion:</label>
+          <input type="number" value={anioPub} onChange={(e) => setAnioPub(e.target.value)} required />
         </div>
         <div className="form-group">
-          <label>Descripcion de la categoria:</label>
-          <textarea value={descripcion} onChange={(e) => setDescripcion(e.target.value)} id='input-descripcion-libro'required />
+          <label>Cantidad de copias:</label>
+          <input type="number" value={copias} onChange={(e) => setCopias(e.target.value)} required />
         </div>
         <div className="button-container">
           <button id='btn-registro' type="submit" disabled={isSubmitDisabled}>Enviar</button>
@@ -63,12 +116,12 @@ function FormGenero() {
       {/* Renderiza el modal si modalVisible es true */}
       {modalVisible && (
         <Modal
-        tituloMsj="Categoria de genero creado"
-        cuerpoMsj={"Genero cargado en el sistema"}
+        tituloMsj="Perfil de libro creado"
+        cuerpoMsj={"Libro cargado en el sistema"}
       />
       )}
     </div>
   );
 }
 
-export default FormGenero;
+export default FormLibro;
