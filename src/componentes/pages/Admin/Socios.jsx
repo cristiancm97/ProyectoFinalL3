@@ -3,6 +3,7 @@ import NavBarAdmin from '../../NavBar/NavBarAdmin'
 import Footer from '../../Footer/Footer'
 import './Socios.css'
 import FormRegistro from '../../FormRegistro/FormRegistro'
+import ListaUsuarios from '../../Listas/ListaSocios/ListaUsuario'
 
 
 function Socios() {
@@ -14,7 +15,7 @@ function Socios() {
         case "Dar de alta un socio":
             return <FormRegistro/>
         case "Ver lista de socios":
-            return <NavBarAdmin/>
+            return <ListaUsuarios/>
         default:
             return null; // Renderiza null si no se ha seleccionado ninguna opción válida
     }
