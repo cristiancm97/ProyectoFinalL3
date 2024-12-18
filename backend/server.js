@@ -18,7 +18,7 @@ const db = mysql.createConnection({
 });
 
 
-
+//-----------------------------------------------------SECCION LOGIN------------------------------------------------------------
 // Ruta para iniciar sesión
 app.post('/api/login', (req, res) => {
   const { NombreUsuario, Contrasena } = req.body;
@@ -59,6 +59,8 @@ app.post('/api/login', (req, res) => {
 
 
 
+
+//-----------------------------------------------------SECCION USUARIOS------------------------------------------------------------
 // Ruta para obtener los usuarios
 app.get('/api/usuarios', (req, res) => {
   db.query('SELECT * FROM Usuarios', (err, results) => {
@@ -69,48 +71,6 @@ app.get('/api/usuarios', (req, res) => {
     res.json(results);
   });
 });
-
-// Ruta para crear un nuevo usuario
-/*app.post('/api/usuarios', (req, res) => {
-  const { NombreUsuario, Nombre, Email, Telefono } = req.body;
-
-  if (!NombreUsuario || !Nombre || !Email || !Telefono) {
-    return res.status(400).send('Todos los campos son requeridos');
-  }
-
-  const query = `
-    INSERT INTO Usuarios (NombreUsuario, Contrasena, Rol, Nombre, Email, Telefono)
-    VALUES (?, '', 'Empleado', ?, ?, ?)
-  `;
-
-  db.query(query, [NombreUsuario, Nombre, Email, Telefono], (err, results) => {
-    if (err) {
-      console.error(err);
-      return res.status(500).send('Error al crear el usuario');
-    }
-    res.status(201).json({ id: results.insertId, NombreUsuario, Nombre, Email, Telefono, Rol: 'Empleado' });
-  });
-});
-
-// Ruta para editar un usuario
-app.put('/api/usuarios/:id', (req, res) => {
-  const { id } = req.params;
-  const { NombreUsuario, Nombre, Email, Telefono } = req.body;
-
-  const query = `
-    UPDATE Usuarios
-    SET NombreUsuario = ?, Nombre = ?, Email = ?, Telefono = ?
-    WHERE UsuarioID = ?
-  `;
-
-  db.query(query, [NombreUsuario, Nombre, Email, Telefono, id], (err, results) => {
-    if (err) {
-      console.error(err);
-      return res.status(500).send('Error al actualizar el usuario');
-    }
-    res.json({ id, NombreUsuario, Nombre, Email, Telefono, Rol: 'Empleado' });
-  });
-});*/
 
 // Ruta para crear un nuevo usuario
 app.post('/api/usuarios', (req, res) => {
@@ -189,7 +149,7 @@ app.delete('/api/usuarios/:id', (req, res) => {
 
 
 
-
+//-----------------------------------------------------SECCION CATEGORIAS------------------------------------------------------------
 // Ruta para obtener las categorías
 app.get('/api/categorias', (req, res) => {
   db.query('SELECT * FROM Categorias', (err, results) => {
@@ -261,7 +221,7 @@ app.delete('/api/categorias/:id', (req, res) => {
 
 
 
-
+//-----------------------------------------------------SECCION PROVEEDORES------------------------------------------------------------
 // Ruta para obtener los proveedores
 app.get('/api/proveedores', (req, res) => {
   db.query('SELECT * FROM Proveedores', (err, results) => {
@@ -333,7 +293,7 @@ app.delete('/api/proveedores/:id', (req, res) => {
 
 
 
-
+//-----------------------------------------------------SECCION CLIENTES------------------------------------------------------------
 // Ruta para obtener los clientes
 app.get('/api/clientes', (req, res) => {
   db.query('SELECT * FROM Clientes', (err, results) => {
@@ -405,7 +365,7 @@ app.delete('/api/clientes/:id', (req, res) => {
 
 
 
-
+//-----------------------------------------------------SECCION PRODUCTOS------------------------------------------------------------
 // Ruta para obtener los productos
 app.get('/api/productos', (req, res) => {
   const query = `
@@ -493,7 +453,7 @@ app.delete('/api/productos/:id', (req, res) => {
 
 
 
-
+//-----------------------------------------------------SECCION COMPRAS------------------------------------------------------------
 // Ruta para obtener proveedores
 app.get('/api/proveedores', (req, res) => {
   const query = 'SELECT * FROM Proveedores';
@@ -587,7 +547,7 @@ app.get('/api/compras/:compraID', (req, res) => {
 
 
 
-
+//-----------------------------------------------------SECCION VENTAS------------------------------------------------------------
 // Ruta para crear una nueva venta
 app.post('/api/ventas', (req, res) => {
   const { clienteID, productos } = req.body;
