@@ -94,7 +94,6 @@ function Ventas() {
     }
   };
 
-
   const handleVerDetalle = async (VentaID) => {
     const response = await fetch(`http://localhost:5000/api/ventas/${VentaID}`);
     const data = await response.json();
