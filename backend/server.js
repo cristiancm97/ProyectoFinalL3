@@ -574,44 +574,100 @@ app.get('/api/compras/:compraID', (req, res) => {
 
 
 //-----------------------------------------------------SECCION VENTAS------------------------------------------------------------
-// Ruta para crear una nueva venta
+// Obtener todas las ventas con la información del cliente y usuario
+app.get('/api/ventas', (req, res) => {
+  const query = `
+    SELECT 
+      v.VentaID,
+      v.ClienteID,
+      v.UsuarioID,
+      v.FechaVenta,
+      v.TotalVenta,
+      c.NombreCliente,
+      u.NombreUsuario
+    FROM Ventas v
+    JOIN Clientes c ON v.ClienteID = c.ClienteID
+    JOIN Usuarios u ON v.UsuarioID = u.UsuarioID
+  `;
+  db.query(query, (err, results) => {
+    if (err) {
+      return res.status(500).json({ message: 'Error al obtener ventas' });
+    }
+    res.json(results);
+  });
+});
+
+// Obtener todos los productos
+app.get('/api/productos', (req, res) => {
+  const query = 'SELECT * FROM Productos'; // Asegúrate de que esta tabla esté correctamente definida
+  db.query(query, (err, results) => {
+    if (err) {
+      return res.status(500).json({ message: 'Error al obtener productos' });
+    }
+    res.json(results);
+  });
+});
+
+// Obtener todos los clientes
+app.get('/api/clientes', (req, res) => {
+  const query = 'SELECT * FROM Clientes';
+  db.query(query, (err, results) => {
+    if (err) {
+      return res.status(500).json({ message: 'Error al obtener clientes' });
+    }
+    res.json(results);
+  });
+});
+
+// Crear una nueva venta
 app.post('/api/ventas', (req, res) => {
   const { clienteID, productos } = req.body;
-  const usuarioID = req.headers['usuario-id'];  // Obtener el UsuarioID desde los headers
-
+  
   // Calcular el total de la venta
-  const totalVenta = productos.reduce((total, producto) => total + producto.precioUnitario * producto.cantidad, 0);
+  const totalVenta = productos.reduce((total, producto) => total + (producto.cantidad * producto.precioUnitario), 0);
 
-  // Insertar la venta en la base de datos
-  const queryVenta = 'INSERT INTO Ventas (ClienteID, UsuarioID, TotalVenta) VALUES (?, ?, ?)';
-  db.query(queryVenta, [clienteID, usuarioID, totalVenta], (err, result) => {
+  // Insertar la venta en la tabla Ventas
+  const query = 'INSERT INTO Ventas (ClienteID, UsuarioID, TotalVenta) VALUES (?, ?, ?)';
+  db.query(query, [clienteID, 1, totalVenta], (err, result) => { // UsuarioID está hardcodeado como 1, cámbialo según corresponda
     if (err) {
-      return res.status(500).json({ message: 'Error al registrar la venta' });
+      return res.status(500).json({ message: 'Error al crear venta' });
     }
 
-    // Obtener el ID de la venta recién creada
+    // Obtener el ID de la venta recién insertada
     const ventaID = result.insertId;
 
-    // Insertar los productos en el detalle de la venta
-    const detalleQuery = 'INSERT INTO DetalleVentas (VentaID, ProductoID, Cantidad, PrecioUnitario, Subtotal) VALUES (?, ?, ?, ?, ?)';
-    productos.forEach(producto => {
-      const subtotal = producto.precioUnitario * producto.cantidad;
-      db.query(detalleQuery, [ventaID, producto.productoID, producto.cantidad, producto.precioUnitario, subtotal], (err) => {
+    // Insertar productos de la venta en la tabla DetalleVentas
+    productos.forEach((producto) => {
+      const subtotal = producto.cantidad * producto.precioUnitario;
+      const queryDetalle = `
+        INSERT INTO DetalleVentas (VentaID, ProductoID, Cantidad, PrecioUnitario, Subtotal)
+        VALUES (?, ?, ?, ?, ?)
+      `;
+      db.query(queryDetalle, [ventaID, producto.productoID, producto.cantidad, producto.precioUnitario, subtotal], (err) => {
         if (err) {
-          console.error('Error al insertar el detalle de la venta:', err);
-        }
-      });
-
-      // Actualizar el stock del producto en la base de datos
-      const queryActualizarStock = 'UPDATE Productos SET Stock = Stock - ? WHERE ProductoID = ?';
-      db.query(queryActualizarStock, [producto.cantidad, producto.productoID], (err) => {
-        if (err) {
-          console.error('Error al actualizar el stock del producto:', err);
+          return res.status(500).json({ message: 'Error al registrar productos de la venta' });
         }
       });
     });
 
-    res.status(200).json({ message: 'Venta registrada correctamente' });
+    res.status(201).json({ message: 'Venta creada con éxito' });
+  });
+});
+
+// Ruta para obtener el detalle de una venta
+app.get('/api/ventas/:ventaID', (req, res) => {
+  const { ventaID } = req.params;
+  const query = `
+    SELECT dv.DetalleVentaID, p.NombreProducto, dv.Cantidad, dv.PrecioUnitario, dv.Subtotal
+    FROM DetalleVentas dv
+    JOIN Productos p ON dv.ProductoID = p.ProductoID
+    WHERE dv.VentaID = ?
+  `;
+  db.query(query, [ventaID], (err, results) => {
+    if (err) {
+      return res.status(500).json({ message: 'Error al obtener el detalle de la venta' });
+    }
+    res.json(results);
   });
 });
 

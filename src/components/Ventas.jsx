@@ -1,4 +1,4 @@
-/*import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 
 function Ventas() {
   const [ventas, setVentas] = useState([]);
@@ -8,6 +8,9 @@ function Ventas() {
     clienteID: '',
     productos: [{ productoID: '', cantidad: 1 }],
   });
+
+  const [DetalleVenta, setDetalleVenta] = useState([]);
+  const [modalVisible, setModalVisible] = useState(false); // Estado para manejar la visibilidad del modal
 
   useEffect(() => {
     fetchVentas();
@@ -91,6 +94,18 @@ function Ventas() {
     }
   };
 
+
+  const handleVerDetalle = async (VentaID) => {
+    const response = await fetch(`http://localhost:5000/api/ventas/${VentaID}`);
+    const data = await response.json();
+    setDetalleVenta(data);
+    setModalVisible(true); // Mostrar el modal al obtener los detalles
+  };
+
+  const handleCloseModal = () => {
+    setModalVisible(false); // Cerrar el modal
+  };
+
   return (
     <div className="ventas">
       <h2>Gestión de Ventas</h2>
@@ -133,8 +148,10 @@ function Ventas() {
           <tr>
             <th>ID</th>
             <th>Cliente</th>
-            <th>Fecha</th>
+            <th>Usuario</th>
             <th>Total</th>
+            <th>Fecha</th>
+            <th>Detalle</th>
           </tr>
         </thead>
         <tbody>
@@ -142,19 +159,56 @@ function Ventas() {
             <tr key={venta.VentaID}>
               <td>{venta.VentaID}</td>
               <td>{venta.NombreCliente}</td>
-              <td>{new Date(venta.FechaVenta).toLocaleString()}</td>
+              <td>{venta.NombreUsuario}</td>
               <td>${venta.TotalVenta}</td>
+              <td>{new Date(venta.FechaVenta).toLocaleString()}</td>
+              <td>
+                <button onClick={() => handleVerDetalle(venta.VentaID)}>Ver Detalle</button>
+              </td>
             </tr>
           ))}
         </tbody>
       </table>
+
+
+      {/* Modal */}
+      {modalVisible && (
+        <div className="modal-overlay" onClick={handleCloseModal}>
+          <div className="modal" onClick={(e) => e.stopPropagation()}>
+            <h3>Detalle de la Venta</h3>
+            <table>
+              <thead>
+                <tr>
+                  <th>Producto</th>
+                  <th>Cantidad</th>
+                  <th>Precio Unitario</th>
+                  <th>Subtotal</th>
+                </tr>
+              </thead>
+              <tbody>
+                {DetalleVenta.map((detalle) => (
+                  <tr key={detalle.DetalleVentaID}>
+                    <td>{detalle.NombreProducto}</td>
+                    <td>{detalle.Cantidad}</td>
+                    <td>${detalle.PrecioUnitario}</td>
+                    <td>${detalle.Subtotal}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+            <button onClick={handleCloseModal}>Cerrar</button>
+          </div>
+        </div>
+      )}
+
+
     </div>
   );
 }
 
-export default Ventas;*/
+export default Ventas;
 
-import React, { useState, useEffect } from 'react';
+/*import React, { useState, useEffect } from 'react';
 
 const Ventas = () => {
   const [clientes, setClientes] = useState([]);
@@ -289,6 +343,6 @@ const Ventas = () => {
   );
 };
 
-export default Ventas;
+export default Ventas;*/
 
 
