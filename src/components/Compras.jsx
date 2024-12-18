@@ -60,7 +60,8 @@ const Compras = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const usuarioID = 1; // Puedes obtener el ID del usuario desde el localStorage o estado global
+    const userID = localStorage.getItem('userID');
+    const usuarioID = userID;
 
     // Primero, registrar la compra
     const response = await fetch('http://localhost:5000/api/compras', {
@@ -213,6 +214,7 @@ const Compras = () => {
             <th>ID</th>
             <th>Proveedor</th>
             <th>Fecha</th>
+            <th>Usuario</th>
             <th>Total</th>
             <th>Detalle</th>
           </tr>
@@ -220,12 +222,13 @@ const Compras = () => {
         <tbody>
           {compras.map((compra) => (
             <tr key={compra.CompraID}>
-              <td>{compra.CompraID}</td>
-              <td>{compra.NombreProveedor}</td>
-              <td>{new Date(compra.FechaCompra).toLocaleString()}</td>
-              <td>${compra.TotalCompra}</td>
+              <td>{compra.IdCompra}</td>
+              <td>{compra.Proveedor}</td>
+              <td>{new Date(compra.Fecha).toLocaleString()}</td>
+              <td>{compra.Usuario || 'N/A'}</td>
+              <td>${compra.Total}</td>
               <td>
-                <button onClick={() => handleVerDetalle(compra.CompraID)}>Ver Detalle</button>
+                <button onClick={() => handleVerDetalle(compra.IdCompra)}>Ver Detalle</button>
               </td>
             </tr>
           ))}

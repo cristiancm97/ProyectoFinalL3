@@ -517,7 +517,7 @@ app.post('/api/compras', (req, res) => {
 });
 
 // Ruta para obtener todas las compras
-app.get('/api/compras', (req, res) => {
+/*app.get('/api/compras', (req, res) => {
   const query = 'SELECT * FROM Compras';
   db.query(query, (err, results) => {
     if (err) {
@@ -525,7 +525,33 @@ app.get('/api/compras', (req, res) => {
     }
     res.json(results);
   });
+});*/
+
+// Ruta para obtener todas las compras con datos de usuarios y proveedores
+app.get('/api/compras', (req, res) => {
+  const query = `
+    SELECT 
+      compras.CompraID AS IdCompra,
+      compras.FechaCompra AS Fecha,
+      usuarios.Nombre AS Usuario,
+      proveedores.NombreProveedor AS Proveedor,
+      compras.TotalCompra AS Total
+    FROM 
+      Compras
+    LEFT JOIN 
+      Usuarios ON Compras.UsuarioID = Usuarios.UsuarioID
+    LEFT JOIN 
+      Proveedores ON Compras.ProveedorID = Proveedores.ProveedorID;
+  `;
+  
+  db.query(query, (err, results) => {
+    if (err) {
+      return res.status(500).json({ message: 'Error al obtener compras', error: err });
+    }
+    res.json(results);
+  });
 });
+
 
 // Ruta para obtener el detalle de una compra
 app.get('/api/compras/:compraID', (req, res) => {
