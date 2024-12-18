@@ -71,7 +71,7 @@ app.get('/api/usuarios', (req, res) => {
 });
 
 // Ruta para crear un nuevo usuario
-app.post('/api/usuarios', (req, res) => {
+/*app.post('/api/usuarios', (req, res) => {
   const { NombreUsuario, Nombre, Email, Telefono } = req.body;
 
   if (!NombreUsuario || !Nombre || !Email || !Telefono) {
@@ -110,7 +110,66 @@ app.put('/api/usuarios/:id', (req, res) => {
     }
     res.json({ id, NombreUsuario, Nombre, Email, Telefono, Rol: 'Empleado' });
   });
+});*/
+
+// Ruta para crear un nuevo usuario
+app.post('/api/usuarios', (req, res) => {
+  const { NombreUsuario, Nombre, Email, Telefono, Contrasena } = req.body;
+
+  if (!NombreUsuario || !Nombre || !Email || !Telefono || !Contrasena) {
+    return res.status(400).send('Todos los campos son requeridos');
+  }
+
+  const query = `
+    INSERT INTO Usuarios (NombreUsuario, Contrasena, Rol, Nombre, Email, Telefono)
+    VALUES (?, ?, 'Empleado', ?, ?, ?)
+  `;
+
+  db.query(query, [NombreUsuario, Contrasena, Nombre, Email, Telefono], (err, results) => {
+    if (err) {
+      console.error(err);
+      return res.status(500).send('Error al crear el usuario');
+    }
+    res.status(201).json({
+      id: results.insertId,
+      NombreUsuario,
+      Nombre,
+      Email,
+      Telefono,
+      Rol: 'Empleado',
+      Contrasena,
+    });
+  });
 });
+
+// Ruta para editar un usuario
+app.put('/api/usuarios/:id', (req, res) => {
+  const { id } = req.params;
+  const { NombreUsuario, Nombre, Email, Telefono, Contrasena } = req.body;
+
+  const query = `
+    UPDATE Usuarios
+    SET NombreUsuario = ?, Nombre = ?, Email = ?, Telefono = ?, Contrasena = ?
+    WHERE UsuarioID = ?
+  `;
+
+  db.query(query, [NombreUsuario, Nombre, Email, Telefono, Contrasena, id], (err, results) => {
+    if (err) {
+      console.error(err);
+      return res.status(500).send('Error al actualizar el usuario');
+    }
+    res.json({
+      id,
+      NombreUsuario,
+      Nombre,
+      Email,
+      Telefono,
+      Rol: 'Empleado',
+      Contrasena,
+    });
+  });
+});
+
 
 // Ruta para eliminar un usuario
 app.delete('/api/usuarios/:id', (req, res) => {
